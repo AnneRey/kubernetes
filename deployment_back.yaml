@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-analyst-api-deployment
+  labels:
+    tes: liveness
+    app: movie-analyst-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: movie-analyst-api
+#this specifies the pod, so it should be assoc with the registry
+  template:
+    metadata:
+      labels:
+        app: movie-analyst-api
+    spec:
+      containers:
+      - name: movie-analyst-api
+        image: 18.237.52.151:5000/backimage
+      imagePullSecrets:
+      - name: registrySecret
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5 
+          #timeoutSeconds: 1      
