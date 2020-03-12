@@ -5,7 +5,10 @@ metadata:
 spec:
   selector:
     app: movie-analyst-ui
+    tier: frontEnd
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 3000
+      port: 3030
+      nodePort: 30100
+      targetPort: 3030
+  type: NodePort

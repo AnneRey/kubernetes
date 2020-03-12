@@ -5,7 +5,9 @@ metadata:
 spec:
   selector:
     app: movie-analyst-api
+    tier: backEnd
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+  type: clusterIP 

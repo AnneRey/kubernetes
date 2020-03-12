@@ -3,38 +3,44 @@ kind: Deployment
 metadata:
   name: movie-analyst-api-deployment
   labels:
-    tes: liveness
     app: movie-analyst-api
+    tier: backEnd
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: movie-analyst-api
+      tier: backEnd
 #this specifies the pod, so it should be assoc with the registry
   template:
     metadata:
       labels:
         app: movie-analyst-api
+        tier: backEnd
     spec:
       containers:
       - name: movie-analyst-api
+        imagePullPolicy: Always
         image: 18.237.52.151:5000/backimage
+        env:
+          - name: DB_HOST
+            value: mysql
+          - name: DB_USER
+            value: root
+          - name: DB_PASS
+            value: 123456abcd
       imagePullSecrets:
-      - name: registrySecret
+      - name: registry-secret
         ports:
         - containerPort: 3000
         livenessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
+          tcpSocket:
+            port: 3000
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/healthy
+          tcpSocket:
+            port: 3000
           initialDelaySeconds: 5
           periodSeconds: 5 
           #timeoutSeconds: 1      

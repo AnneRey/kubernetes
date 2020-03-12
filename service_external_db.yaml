@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+spec:
+  type: ExternalName
+  externalName: terraform-20200312163922859100000001.cxauktryvxy4.us-west-2.rds.amazonaws.com
+
