@@ -18,6 +18,7 @@ spec:
         app: movie-analyst-ui
         tier: frontEnd
     spec:
+      imagePullPolicy: Always
       imagePullSecrets:
         - name: registry-secret
       containers:
