@@ -23,7 +23,7 @@ spec:
       containers:
         - name: movie-analyst-api
           imagePullPolicy: Always
-          image: 18.237.52.151:5000/backimage
+          image: 34.220.121.141:5000/backimage
           env:
             - name: DB_HOST
               value: mysql
