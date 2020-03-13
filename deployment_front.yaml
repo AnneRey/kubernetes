@@ -18,24 +18,24 @@ spec:
         app: movie-analyst-ui
         tier: frontEnd
     spec:
-      containers:
-      - name: movie-analyst-ui
-        image: 18.237.52.151:5000/frontimage
-        env:
-        - name: BACKEND_URL
-          value: "service-backEnd"
       imagePullSecrets:
-      - name: registry-secret
-        ports:
-        - containerPort: 3030
-        livenessProbe:
-          tcpSocket:
-            port: 3030
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        readinessProbe:
-          tcpSocket:
-            port: 3030
-          initialDelaySeconds: 5
-          periodSeconds: 5 
-          #timeoutSeconds: 1      
+        - name: registry-secret
+      containers:
+        - name: movie-analyst-ui
+          image: 18.237.52.151:5000/frontimage
+          env:
+          - name: BACKEND_URL
+            value: "service-backEnd"      
+          ports:
+          - containerPort: 3030
+          livenessProbe:
+            tcpSocket:
+              port: 3030
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3030
+            initialDelaySeconds: 5
+            periodSeconds: 5 
+            #timeoutSeconds: 1      
